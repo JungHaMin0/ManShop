@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MainMapper">
+
+	<!-- 메인 인덱스 상품 리스트 -->
+	<select id="MainList" resultType="com.spring.ex.domain.ProductVO">
+		SELECT * FROM product 
+		ORDER BY pdtDate DESC
+	</select>
+	
+	<!-- 메인 인덱스 상품에서 상세보기 -->
+	<select id="shopSg" parameterType="int" resultType="com.spring.ex.domain.ProductVO">
+		SELECT *
+		FROM product
+		WHERE pdtNum = #{pdtNum}
+	</select>
+	
+	<!-- 메인 인덱스 상품에서 카테고리 분류 -->
+	<select id="mname" resultType="com.spring.ex.domain.ProductVO">
+		SELECT pdtNum, category_main.name AS mname
+		FROM product, category_main
+		WHERE (pdtNum=4) = category_main.id
+	</select>
+	
+	<select id="sname" resultType="com.spring.ex.domain.ProductVO">
+		SELECT pdtNum, category_sub.name AS sname
+		FROM product, category_sub
+		WHERE (pdtNum=4) = category_sub.id
+	</select>
+	
+</mapper>
